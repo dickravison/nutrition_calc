@@ -39,9 +39,9 @@ def calculate_cho(threshold, intensity_factor, planned_hrs):
         cho = 12
     elif threshold <= 300:
         cho = 13
-    elif threshold <=330:
+    elif threshold <= 330:
         cho = 14
-    elif threshold <=360:
+    elif threshold <= 360:
         cho = 15
     else:
         cho = 16
@@ -53,11 +53,11 @@ def calculate_cho(threshold, intensity_factor, planned_hrs):
 def calculate_pro(weight_kg, planned_hours, WEIGHT_LOSS):
     if WEIGHT_LOSS:
         pro = 1
-    elif planned_hours<1:
+    elif planned_hours < 1:
         pro = 0.7
-    elif planned_hours<2:
+    elif planned_hours < 2:
         pro = 0.8
-    elif planned_hours<2.5:
+    elif planned_hours < 2.5:
         pro = 0.9
     else:
         pro = 1
@@ -87,7 +87,7 @@ def calculate_swim_expenditure(duration_hours):
 def generate_nutrition_plan(athlete, workouts):
     bmr = calculate_bmr(athlete['weight'], athlete['height'], athlete['age'], athlete['sex'])
     tdee = calculate_tdee(bmr, ACTIVITY_LEVEL)
-    iee = tdee - CALORIE_DEFICIT.get("aggressive") if WEIGHT_LOSS else tdee
+    iee = tdee - CALORIE_DEFICIT.get("medium") if WEIGHT_LOSS else tdee
 
     nutrition_plan = {}
     
@@ -178,7 +178,7 @@ def generate_nutrition_plan(athlete, workouts):
         swim_kcal = calculate_swim_expenditure(swim_hrs) if swim_hrs else 0
 
         total_kcal = iee + bike_kcal + run_kcal + swim_kcal
-        total_kcal = max(total_kcal, CALORIE_FLOOR)  # Ensure calorie floor
+        total_kcal = max(total_kcal, CALORIE_FLOOR)  # Ensure calorie floor isn't breached
 
         bike_intensity_factor = bike_power / athlete['bike_threshold'] if bike_hrs else 0
         run_intensity_factor = athlete['run_threshold'] / run_pace if run_hrs else 0

@@ -134,7 +134,7 @@ def generate_nutrition_plan(athlete, workouts):
                 elif workout_type == "Swim":
                     workout_totals["Swim"]["pace"] += athlete['swim_threshold'] / workout['ifPlanned']
                     workout_totals["Swim"]["hours"] += total_time
-                    workout_totals["Bike"]["sessions"] += 1
+                    workout_totals["Swim"]["sessions"] += 1
             elif workout_type == "Swim": 
                 distance_planned = workout.get('distancePlanned', 0)
                 if distance_planned:
